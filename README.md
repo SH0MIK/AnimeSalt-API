@@ -1,7 +1,15 @@
 ### <img src="public/AnimeSalt.png" height="25"> AnimeSalt API
 
+A Node.js and Express-powered RESTful API designed to scrape and extract data from **AnimeSalt** and **WatchAnimeWorld** (same UI theme).
 
-A Node.js and Express-powered RESTful API designed to scrape and extract data from AnimeSalt.
+### Supported Providers
+
+| Provider ID        | Site                      | Notes                          |
+|--------------------|---------------------------|--------------------------------|
+| `animesalt` (default) | https://animesalt.link   | Primary / default source       |
+| `watchanimeworld`  | https://watchanimeworld.top | Same WordPress/Torofilm UI   |
+
+Pass `?provider=watchanimeworld` (or aliases `waw`, `animeworld`) on any endpoint to switch sources.
 
 ### Screenshot
 
@@ -13,6 +21,7 @@ A Node.js and Express-powered RESTful API designed to scrape and extract data fr
 
 ### Features
 
+- 🌐 **Multi-provider support** — AnimeSalt + WatchAnimeWorld (same scraper logic)
 - 🎬 Extract home page content (newest drops, trending, etc.)
 - 📺 Get detailed information about series and movies
 - 📚 Fetch episodes by season
@@ -21,8 +30,10 @@ A Node.js and Express-powered RESTful API designed to scrape and extract data fr
 - 🔤 Browse alphabetically by letter (A-Z)
 - 🔎 Search functionality (AJAX suggestions and full page search)
 - 🔒 Origin-based access control
-- 🛡️ Security middleware (Helmet, CORS, Rate Limiting)
+- 🛡️ Security middleware (Helmet, CORS)
+- 🔁 Built-in HTTP retries for flaky upstream responses
 - 📄 Beautiful HTML error pages (403, 404)
+- ❤️ Health + providers discovery endpoints
 
 ### Prerequisites
 
@@ -81,12 +92,49 @@ CORS_ORIGIN=https://example.com,https://another.com
 
 All endpoints are prefixed with `/api` and require a valid origin/referer header (unless `CORS_ORIGIN=*`).
 
+**Global query parameter (all scrape endpoints):**
+
+| Param       | Values                                      | Default      |
+|-------------|---------------------------------------------|--------------|
+| `provider`  | `animesalt`, `watchanimeworld` (or aliases) | `animesalt`  |
+
+Examples:
+```http
+GET /api/home
+GET /api/home?provider=watchanimeworld
+GET /api/search?q=naruto&provider=waw
+GET /api/info/naruto?provider=animesalt
+```
+
+### Providers
+
+List available scrape providers.
+
+```http
+GET /api/providers
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "data": {
+    "default": "animesalt",
+    "providers": [
+      { "id": "animesalt", "name": "AnimeSalt", "baseUrl": "https://animesalt.link" },
+      { "id": "watchanimeworld", "name": "WatchAnimeWorld", "baseUrl": "https://watchanimeworld.top" }
+    ]
+  }
+}
+```
+
 ### Home Page
 
 Get home page content including newest drops, trending, and other categories.
 
 ```http
 GET /api/home
+GET /api/home?provider=watchanimeworld
 ```
 
 **Response:**
@@ -403,14 +451,12 @@ ISC License - See [LICENSE](LICENSE) file for details.
 
 ## Author
 
-**Basirul Akhlak Borno**
+**Dark & Pyro Team**
 
-- Website: https://github.com/basirulakhlakborno
-- GitHub: https://github.com/basirulakhlakborno
 
 ## Copyright
 
-Copyright (c) 2025 Basirul Akhlak Borno. All Rights Reserved.
+Copyright (c) 2025 Dark & Pyro Team. All Rights Reserved.
 
 ## Disclaimer
 

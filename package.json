@@ -1,7 +1,7 @@
 {
-  "name": "anibiee",
-  "version": "1.0.0",
-  "description": "RESTful API scraper for AnimeWorldIndia. ⚠️ WARNING: This API is provided for educational and research purposes only. Users are responsible for ensuring their use complies with all applicable copyright laws and terms of service. The developers do not endorse or facilitate piracy.",
+  "name": "animesalt-api",
+  "version": "1.1.0",
+  "description": "RESTful multi-provider API scraper for AnimeSalt (animesalt.link) and WatchAnimeWorld (watchanimeworld.top). \u26a0\ufe0f Educational use only \u2014 respect copyright laws.",
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",
@@ -25,15 +25,10 @@
     "data-extraction",
     "rest-api"
   ],
-  "author": "Basirul Akhlak Borno <basirulakhlak@gmail.com> (https://github.com/basirulakhlakborno)",
+  "author": "Dark & Pyro Team",
   "license": "ISC",
-  "homepage": "https://github.com/basirulakhlakborno",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/basirulakhlakborno/AniBiee-AnimeWorldIndia-scraper"
-  },
-  "copyright": "Copyright (c) 2025 Basirul Akhlak Borno. All Rights Reserved.",
-  "disclaimer": "⚠️ LEGAL DISCLAIMER: This API is provided for educational and research purposes only. Users are responsible for ensuring their use complies with all applicable copyright laws and terms of service. The developers do not endorse or facilitate piracy. All content accessed through this API remains the property of its respective copyright holders. Use responsibly and respect intellectual property rights.",
+  "copyright": "Copyright (c) 2025 Dark & Pyro Team. All Rights Reserved.",
+  "disclaimer": "\u26a0\ufe0f LEGAL DISCLAIMER: This API is provided for educational and research purposes only. Users are responsible for ensuring their use complies with all applicable copyright laws and terms of service. The developers do not endorse or facilitate piracy. All content accessed through this API remains the property of its respective copyright holders. Use responsibly and respect intellectual property rights.",
   "dependencies": {
     "axios": "^1.6.2",
     "cheerio": "^1.0.0-rc.12",
@@ -57,5 +52,10 @@
     "README.md",
     "LICENSE",
     ".env.example"
-  ]
+  ],
+  "homepage": "https://github.com/itzzzdark/AnimeSalt-API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itzzzdark/AnimeSalt-API"
+  }
 }
