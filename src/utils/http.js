@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 const axios = require('axios');
 const { logger } = require('./logger');
 
@@ -48,7 +53,7 @@ class HttpClient {
     const config = {
       url,
       method: 'GET',
-      timeout: options?.timeout,
+      timeout: options?.timeout ?? 30000,
       headers: {
         ...this.client.defaults.headers,
         ...options?.headers,
@@ -56,7 +61,8 @@ class HttpClient {
     };
 
     let lastError;
-    const retries = options?.retries ?? 0;
+    // Default to 2 retries for flaky streaming sites / Cloudflare
+    const retries = options?.retries ?? 2;
     const retryDelay = options?.retryDelay ?? 1000;
 
     for (let attempt = 0; attempt <= retries; attempt++) {

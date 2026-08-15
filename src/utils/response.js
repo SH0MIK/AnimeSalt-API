@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 function sendSuccess(res, data, message, statusCode = 200) {
   const response = {
     success: true,

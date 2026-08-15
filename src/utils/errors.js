@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 class AppError extends Error {
   constructor(message, statusCode = 500, isOperational = true) {
     super(message);
