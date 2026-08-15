@@ -1,6 +1,6 @@
 /**
  * Embed Page Extractor
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -8,9 +8,9 @@ const { BaseExtractor } = require('./base.extractor');
 const { WatchAnimeWorldBase } = require('../base/base');
 
 class EmbedExtractor extends BaseExtractor {
-  constructor() {
+  constructor(providerKey) {
     super();
-    this.base = new WatchAnimeWorldBase();
+    this.base = new WatchAnimeWorldBase(providerKey);
   }
 
   getSourceName() {

@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 const cheerio = require('cheerio');
 const { httpClient } = require('../utils/http');
 const { logger } = require('../utils/logger');
@@ -16,6 +21,7 @@ class BaseExtractor {
           url,
           extractedAt: new Date().toISOString(),
           source: this.getSourceName(),
+          provider: this.base?.providerId || 'unknown',
         },
       };
     } catch (error) {
@@ -44,18 +50,47 @@ class BaseExtractor {
     return this.sanitizeText(element?.text());
   }
 
+  /**
+   * Normalize image URLs across providers.
+   * Handles protocol-relative URLs and known CDN domain swaps.
+   */
   normalizeImageUrl(imageUrl) {
     if (!imageUrl) return '';
-    
-    // Handle protocol-relative URLs
+
+    // Protocol-relative → https
     if (imageUrl.startsWith('//')) {
       imageUrl = `https:${imageUrl}`;
     }
-    
-    // Replace img.anime-world.co with img.watchanimeworld.net
-    imageUrl = imageUrl.replace(/img\.anime-world\.co/g, 'img.watchanimeworld.net');
-    
+
+    // Common CDN / legacy domain fixes (both sites share similar image infra)
+    imageUrl = imageUrl
+      .replace(/img\.anime-world\.co/g, 'img.watchanimeworld.net')
+      .replace(/http:\/\//g, 'https://');
+
     return imageUrl;
+  }
+
+  /**
+   * Extract slug / type from a full or relative content URL.
+   */
+  parseContentUrl(link) {
+    if (!link) {
+      return { id: '', type: 'unknown' };
+    }
+
+    const fullUrl = this.base ? this.base.buildUrl(link) : link;
+    const cleanUrl = fullUrl.replace(/\/$/, '');
+    const urlParts = cleanUrl.split('/').filter(Boolean);
+    const id = urlParts[urlParts.length - 1] || '';
+
+    let type = 'unknown';
+    if (fullUrl.includes('/series/')) {
+      type = 'series';
+    } else if (fullUrl.includes('/movies/') || fullUrl.includes('/movie/')) {
+      type = 'movie';
+    }
+
+    return { id, type, fullUrl };
   }
 }
 
