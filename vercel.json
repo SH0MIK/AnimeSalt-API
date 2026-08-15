@@ -14,5 +14,6 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  }
+  },
+  "_credit": "Copyright (c) 2025 Dark & Pyro Team"
 }
