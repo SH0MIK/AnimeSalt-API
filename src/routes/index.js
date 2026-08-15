@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 const { Router } = require('express');
 const { ScraperController, HomeController, TypeController, DetailsController, EpisodesController, EmbedController, SearchController } = require('../controllers');
 const { validateQuery } = require('../middleware');
@@ -80,6 +85,9 @@ router.get(
 
 // Health check route
 router.get('/health', (req, res, next) => scraperController.health(req, res, next));
+
+// List supported providers (animesalt, watchanimeworld, ...)
+router.get('/providers', (req, res, next) => scraperController.providers(req, res, next));
 
 // Scraper routes - GET only
 const scrapeSchema = z.object({
