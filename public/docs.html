@@ -3,136 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AnimeSalt API documentation — endpoints, providers, examples. Dark & Pyro Team." />
-  <link rel="icon" type="image/png" href="/AnimeSalt.png" />
-  <title>Docs · AnimeSalt API</title>
+  <meta name="description" content="Renime API documentation — endpoints, providers, examples. Dark & Pyro Team." />
+  <link rel="icon" type="image/png" href="/Renime.png" />
+  <title>Docs · Renime API</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --bg: #05070d;
-      --sidebar-bg: rgba(8, 10, 18, 0.92);
+      --sidebar-bg: #0a0d16;
       --glass: rgba(255, 255, 255, 0.06);
       --glass-border: rgba(255, 255, 255, 0.12);
       --text: #f1f5f9;
       --muted: rgba(241, 245, 249, 0.62);
       --accent: #7dd3fc;
-      --accent-2: #a78bfa;
       --success: #6ee7b7;
-      --code-bg: rgba(0, 0, 0, 0.4);
+      --code-bg: #0c101a;
       --radius: 14px;
       --sidebar-w: 260px;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       color: var(--text);
       background: var(--bg);
       min-height: 100vh;
       line-height: 1.65;
+      overflow-x: hidden;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(900px 480px at 0% 0%, rgba(125, 211, 252, 0.1), transparent 55%),
-        radial-gradient(700px 500px at 100% 0%, rgba(167, 139, 250, 0.08), transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
+
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Top bar (mobile) */
-    .topbar {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      background: var(--sidebar-bg);
-      border-bottom: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-    }
-    .topbar-brand {
-      display: flex; align-items: center; gap: 10px;
-      color: var(--text); font-weight: 700; text-decoration: none; font-size: 0.95rem;
-    }
-    .topbar-brand img { width: 28px; height: 28px; border-radius: 8px; }
-    .menu-btn {
-      width: 40px; height: 40px; border-radius: 10px;
-      border: 1px solid var(--glass-border);
-      background: var(--glass);
-      color: var(--text);
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-    }
-
+    /* ===== Layout ===== */
     .layout {
-      display: grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
+      display: flex;
       min-height: 100vh;
-      position: relative;
-      z-index: 1;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
-    /* Sidebar */
+    /* ===== Sidebar ===== */
     .sidebar {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: var(--sidebar-w);
       height: 100vh;
+      height: 100dvh;
       overflow-y: auto;
-      padding: 24px 14px 32px;
-      border-right: 1px solid var(--glass-border);
+      overflow-x: hidden;
+      padding: 20px 12px 28px;
       background: var(--sidebar-bg);
-      backdrop-filter: blur(20px) saturate(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border-right: 1px solid var(--glass-border);
+      z-index: 100;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      transition: transform 0.28s ease;
     }
-    .sidebar::-webkit-scrollbar { width: 5px; }
-    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 4px; }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
 
     .brand {
-      display: flex; align-items: center; gap: 10px;
-      padding: 6px 10px 18px;
-      text-decoration: none; color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px 16px;
+      text-decoration: none;
+      color: var(--text);
       border-bottom: 1px solid var(--glass-border);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
     }
-    .brand img { width: 34px; height: 34px; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
-    .brand-text { display: flex; flex-direction: column; gap: 1px; }
-    .brand-text strong { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.02em; }
-    .brand-text span { font-size: 0.7rem; color: var(--muted); font-weight: 500; }
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .brand-text { min-width: 0; }
+    .brand-text strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-text span {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
 
-    .nav-group { margin-bottom: 6px; }
+    .nav { flex: 1; min-height: 0; }
     .nav-label {
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
       font-weight: 700;
-      padding: 12px 12px 6px;
+      padding: 14px 12px 6px;
     }
     .nav a {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 9px 12px;
       border-radius: 10px;
       color: var(--muted);
-      font-size: 0.875rem;
+      font-size: 0.86rem;
       font-weight: 500;
       text-decoration: none;
-      transition: background 0.15s, color 0.15s, transform 0.15s;
+      transition: background 0.15s, color 0.15s;
       border: 1px solid transparent;
+    }
+    .nav a i {
+      width: 16px;
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.85;
+      flex-shrink: 0;
     }
     .nav a:hover {
       background: var(--glass);
@@ -142,16 +141,12 @@
     .nav a.active {
       background: rgba(125, 211, 252, 0.12);
       color: var(--accent);
-      border-color: rgba(125, 211, 252, 0.2);
+      border-color: rgba(125, 211, 252, 0.22);
     }
-    .nav a .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: currentColor; opacity: 0.5; flex-shrink: 0;
-    }
-    .nav a.active .dot { opacity: 1; box-shadow: 0 0 8px currentColor; }
 
     .sidebar-foot {
-      margin-top: auto;
+      flex-shrink: 0;
+      margin-top: 16px;
       padding: 14px 10px 0;
       border-top: 1px solid var(--glass-border);
       font-size: 0.72rem;
@@ -160,13 +155,23 @@
     }
     .sidebar-foot strong { color: var(--text); }
 
-    /* Main */
+    /* ===== Main ===== */
     .main {
-      padding: 40px 48px 100px;
-      max-width: 820px;
+      flex: 1;
+      min-width: 0; /* critical: stops grid/flex overflow */
+      width: 100%;
+      margin-left: var(--sidebar-w);
+      padding: 36px 28px 80px;
+      overflow-x: hidden;
     }
+
+    .main-inner {
+      max-width: 760px;
+      width: 100%;
+    }
+
     .main h1 {
-      font-size: 2.1rem;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
       font-weight: 800;
       letter-spacing: -0.035em;
       margin-bottom: 8px;
@@ -174,30 +179,59 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      word-wrap: break-word;
     }
-    .subtitle { color: var(--muted); margin-bottom: 28px; font-size: 1.05rem; }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
     .main h2 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
-      margin: 44px 0 14px;
-      padding-top: 12px;
+      margin: 40px 0 12px;
+      padding-top: 8px;
       letter-spacing: -0.02em;
       border-top: 1px solid var(--glass-border);
-      scroll-margin-top: 24px;
+      scroll-margin-top: 20px;
+      word-wrap: break-word;
     }
-    .main h2:first-of-type { border-top: none; margin-top: 20px; padding-top: 0; }
-    .main h3 { font-size: 1rem; font-weight: 650; margin: 22px 0 10px; color: #e2e8f0; }
-    .main p { color: var(--muted); margin-bottom: 12px; }
-    .main ul { margin: 0 0 16px 1.2em; color: var(--muted); }
+    .main h2:first-of-type {
+      border-top: none;
+      margin-top: 16px;
+      padding-top: 0;
+    }
+
+    .main h3 {
+      font-size: 1rem;
+      font-weight: 650;
+      margin: 20px 0 8px;
+      color: #e2e8f0;
+    }
+
+    .main p {
+      color: var(--muted);
+      margin-bottom: 12px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .main ul {
+      margin: 0 0 16px 1.15em;
+      color: var(--muted);
+    }
     .main li { margin-bottom: 6px; }
 
     .card {
       background: var(--glass);
       border: 1px solid var(--glass-border);
       border-radius: var(--radius);
-      padding: 16px 18px;
-      margin: 14px 0;
-      backdrop-filter: blur(12px);
+      padding: 14px 16px;
+      margin: 12px 0;
+      max-width: 100%;
+      overflow: hidden;
     }
     .card.warn {
       border-color: rgba(252, 165, 165, 0.25);
@@ -205,21 +239,32 @@
       color: #fecaca;
       font-size: 0.9rem;
     }
+
     .endpoint {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      max-width: 100%;
     }
     .method {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; font-weight: 700;
-      padding: 4px 9px; border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 6px;
       background: rgba(110, 231, 183, 0.14);
       color: var(--success);
+      flex-shrink: 0;
     }
     .path {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       color: var(--text);
       font-weight: 500;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+      min-width: 0;
     }
     .badge {
       display: inline-block;
@@ -229,6 +274,49 @@
       background: rgba(125, 211, 252, 0.14);
       color: var(--accent);
       font-weight: 650;
+      flex-shrink: 0;
+    }
+
+    /* Tables — never blow out layout */
+    .table-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 12px 0 20px;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+    }
+    table {
+      width: 100%;
+      min-width: 280px;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--glass-border);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    th {
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      background: rgba(255,255,255,0.03);
+    }
+    td {
+      color: var(--text);
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    td code {
+      font-size: 0.78rem;
+      word-break: break-all;
     }
 
     pre {
@@ -236,12 +324,15 @@
       border: 1px solid var(--glass-border);
       border-radius: 12px;
       padding: 14px 16px;
-      overflow-x: auto;
       margin: 12px 0 18px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       line-height: 1.55;
       color: #e2e8f0;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: pre;
     }
     code {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -249,112 +340,152 @@
       background: rgba(255, 255, 255, 0.07);
       padding: 2px 6px;
       border-radius: 5px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
-    pre code { background: none; padding: 0; }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0 20px;
-      font-size: 0.88rem;
+    pre code {
+      background: none;
+      padding: 0;
+      word-break: normal;
+      overflow-wrap: normal;
     }
-    th, td {
-      text-align: left;
-      padding: 11px 12px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-    th {
-      color: var(--muted);
-      font-weight: 650;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    td { color: var(--text); }
-    td code { font-size: 0.8rem; }
 
     .footer-note {
-      margin-top: 52px;
-      padding-top: 20px;
+      margin-top: 48px;
+      padding-top: 18px;
       border-top: 1px solid var(--glass-border);
       font-size: 0.8rem;
       color: var(--muted);
     }
 
-    /* Overlay for mobile sidebar */
+    /* Mobile topbar */
+    .topbar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 110;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(10, 13, 22, 0.95);
+      border-bottom: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+    .topbar-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+    }
+    .menu-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
     .overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 30;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 90;
       opacity: 0;
-      transition: opacity 0.25s;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
     }
-    .overlay.show { display: block; opacity: 1; }
+    .overlay.show {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
 
+    /* ===== Mobile ===== */
     @media (max-width: 900px) {
       .topbar { display: flex; }
-      .layout { grid-template-columns: 1fr; }
+
       .sidebar {
-        position: fixed;
-        left: 0; top: 0;
-        width: min(300px, 86vw);
-        z-index: 35;
-        transform: translateX(-105%);
-        transition: transform 0.28s ease;
-        box-shadow: 20px 0 40px rgba(0,0,0,0.4);
+        transform: translateX(-100%);
+        box-shadow: 12px 0 40px rgba(0, 0, 0, 0.45);
       }
-      .sidebar.open { transform: translateX(0); }
-      .main { padding: 28px 18px 80px; }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 72px 16px 64px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main { padding: 68px 12px 56px; }
+      pre { font-size: 0.72rem; padding: 12px; }
+      th, td { padding: 8px 10px; }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
+  <header class="topbar">
     <a class="topbar-brand" href="/">
-      <img src="/AnimeSalt.png" alt="" />
-      AnimeSalt Docs
+      <img src="/Renime.png" alt="" />
+      Renime Docs
     </a>
-    <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu">☰</button>
-  </div>
-  <div class="overlay" id="overlay"></div>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+      <i class="fa-solid fa-bars" id="menuIcon"></i>
+    </button>
+  </header>
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
 
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
       <a class="brand" href="/">
-        <img src="/AnimeSalt.png" alt="" />
+        <img src="/Renime.png" alt="" />
         <div class="brand-text">
-          <strong>AnimeSalt API</strong>
+          <strong>Renime API</strong>
           <span>Documentation</span>
         </div>
       </a>
 
       <nav class="nav">
-        <div class="nav-group">
-          <div class="nav-label">Start</div>
-          <a href="#overview" class="nav-link"><span class="dot"></span> Overview</a>
-          <a href="#providers" class="nav-link"><span class="dot"></span> Providers</a>
-          <a href="#access" class="nav-link"><span class="dot"></span> Access control</a>
-          <a href="#install" class="nav-link"><span class="dot"></span> Install</a>
-        </div>
-        <div class="nav-group">
-          <div class="nav-label">Endpoints</div>
-          <a href="#health" class="nav-link"><span class="dot"></span> Health &amp; providers</a>
-          <a href="#home" class="nav-link"><span class="dot"></span> Home</a>
-          <a href="#search" class="nav-link"><span class="dot"></span> Search</a>
-          <a href="#info" class="nav-link"><span class="dot"></span> Details</a>
-          <a href="#episodes" class="nav-link"><span class="dot"></span> Episodes</a>
-          <a href="#embed" class="nav-link"><span class="dot"></span> Embed</a>
-          <a href="#category" class="nav-link"><span class="dot"></span> Category</a>
-          <a href="#letter" class="nav-link"><span class="dot"></span> Letter A–Z</a>
-        </div>
-        <div class="nav-group">
-          <div class="nav-label">More</div>
-          <a href="#errors" class="nav-link"><span class="dot"></span> Errors</a>
-          <a href="#disclaimer" class="nav-link"><span class="dot"></span> Disclaimer</a>
-          <a href="/"><span class="dot"></span> ← Home</a>
-        </div>
+        <div class="nav-label">Start</div>
+        <a href="#overview" class="nav-link"><i class="fa-solid fa-house"></i> Overview</a>
+        <a href="#providers" class="nav-link"><i class="fa-solid fa-server"></i> Providers</a>
+        <a href="#access" class="nav-link"><i class="fa-solid fa-lock"></i> Access control</a>
+        <a href="#install" class="nav-link"><i class="fa-solid fa-download"></i> Install</a>
+
+        <div class="nav-label">Endpoints</div>
+        <a href="#health" class="nav-link"><i class="fa-solid fa-heart-pulse"></i> Health</a>
+        <a href="#home" class="nav-link"><i class="fa-solid fa-film"></i> Home</a>
+        <a href="#search" class="nav-link"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+        <a href="#info" class="nav-link"><i class="fa-solid fa-circle-info"></i> Details</a>
+        <a href="#episodes" class="nav-link"><i class="fa-solid fa-list-ol"></i> Episodes</a>
+        <a href="#embed" class="nav-link"><i class="fa-solid fa-play"></i> Embed</a>
+        <a href="#category" class="nav-link"><i class="fa-solid fa-folder-open"></i> Category</a>
+        <a href="#letter" class="nav-link"><i class="fa-solid fa-font"></i> Letter A–Z</a>
+
+        <div class="nav-label">More</div>
+        <a href="#errors" class="nav-link"><i class="fa-solid fa-triangle-exclamation"></i> Errors</a>
+        <a href="#disclaimer" class="nav-link"><i class="fa-solid fa-scale-balanced"></i> Disclaimer</a>
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Home</a>
       </nav>
 
       <div class="sidebar-foot">
@@ -364,156 +495,192 @@
     </aside>
 
     <main class="main">
-      <h1>API Documentation</h1>
-      <p class="subtitle">Multi-provider REST scraper for AnimeSalt &amp; WatchAnimeWorld.</p>
+      <div class="main-inner">
+        <h1>API Documentation</h1>
+        <p class="subtitle">Hindi anime REST API — multi-provider scraper for AnimeSalt &amp; WatchAnimeWorld.</p>
 
-      <div class="card warn">
-        Educational and research use only. Respect copyright laws and site terms of service. This project does not host media content.
-      </div>
+        <div class="card warn">
+          Educational and research use only. Respect copyright laws and site terms of service. This project does not host media content.
+        </div>
 
-      <h2 id="overview">Overview</h2>
-      <p>All scrape routes live under <code>/api</code> and return JSON. Switch upstream sources with the global <code>provider</code> query parameter.</p>
-      <table>
-        <thead><tr><th>Param</th><th>Values</th><th>Default</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><code>provider</code></td>
-            <td><code>animesalt</code>, <code>watchanimeworld</code> (aliases: <code>waw</code>, <code>animeworld</code>, <code>salt</code>, <code>as</code>)</td>
-            <td><code>animesalt</code></td>
-          </tr>
-        </tbody>
-      </table>
+        <h2 id="overview">Overview</h2>
+        <p>All scrape routes live under <code>/api</code> and return JSON. Switch upstream sources with the global <code>provider</code> query parameter.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Param</th><th>Values</th><th>Default</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><code>provider</code></td>
+                <td><code>animesalt</code>, <code>watchanimeworld</code> (aliases: <code>waw</code>, <code>animeworld</code>, <code>salt</code>, <code>as</code>)</td>
+                <td><code>animesalt</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h2 id="providers">Providers</h2>
-      <table>
-        <thead><tr><th>ID</th><th>Site</th><th>Aliases</th></tr></thead>
-        <tbody>
-          <tr><td><code>animesalt</code></td><td>animesalt.link</td><td>salt, as</td></tr>
-          <tr><td><code>watchanimeworld</code></td><td>watchanimeworld.top</td><td>waw, animeworld, awi</td></tr>
-        </tbody>
-      </table>
+        <h2 id="providers">Providers</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>ID</th><th>Site</th><th>Aliases</th></tr></thead>
+            <tbody>
+              <tr><td><code>animesalt</code></td><td>animesalt.link</td><td>salt, as</td></tr>
+              <tr><td><code>watchanimeworld</code></td><td>watchanimeworld.top</td><td>waw, animeworld, awi</td></tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h2 id="access">Access control</h2>
-      <p>When <code>CORS_ORIGIN</code> is not <code>*</code>, requests must include a matching <code>Origin</code> or <code>Referer</code> header. Mismatches receive a 403 page.</p>
+        <h2 id="access">Access control</h2>
+        <p>When <code>CORS_ORIGIN</code> is not <code>*</code>, requests must include a matching <code>Origin</code> or <code>Referer</code> header. Mismatches receive a 403 page.</p>
 
-      <h2 id="install">Install</h2>
-<pre><code>git clone https://github.com/itzzzdark/AnimeSalt-API.git
-cd AnimeSalt-API
+        <h2 id="install">Install</h2>
+<pre><code>git clone https://github.com/itzzzdark/Renime-API.git
+cd Renime-API
 npm install
 cp .env.example .env
 npm run dev</code></pre>
-      <p>Default base: <code>http://localhost:3000</code></p>
+        <p>Default base: <code>http://localhost:3000</code></p>
 
-      <h2 id="health">Health &amp; providers</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/health</span></div>
+        <h2 id="health">Health &amp; providers</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/health</span></div>
 <pre><code>curl http://localhost:3000/api/health</code></pre>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/providers</span></div>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/providers</span></div>
 <pre><code>curl http://localhost:3000/api/providers</code></pre>
 
-      <h2 id="home">Home</h2>
-      <div class="card endpoint">
-        <span class="method">GET</span><span class="path">/api/home</span>
-        <span class="badge">provider</span>
-      </div>
-      <p>Newest drops, arrivals, movies, cartoons, most-watched lists.</p>
+        <h2 id="home">Home</h2>
+        <div class="card endpoint">
+          <span class="method">GET</span><span class="path">/api/home</span>
+          <span class="badge">provider</span>
+        </div>
+        <p>Newest drops, arrivals, movies, cartoons, most-watched lists.</p>
 <pre><code>curl "http://localhost:3000/api/home?provider=watchanimeworld"</code></pre>
 
-      <h2 id="search">Search</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/search</span></div>
-      <table>
-        <thead><tr><th>Param</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td><code>q</code></td><td>Full search with images</td></tr>
-          <tr><td><code>suggestion</code></td><td>Fast title suggestions</td></tr>
-        </tbody>
-      </table>
+        <h2 id="search">Search</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/search</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Param</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>q</code></td><td>Full search with images</td></tr>
+              <tr><td><code>suggestion</code></td><td>Fast title suggestions</td></tr>
+            </tbody>
+          </table>
+        </div>
 <pre><code>curl "http://localhost:3000/api/search?q=naruto&amp;provider=animesalt"
 curl "http://localhost:3000/api/search?suggestion=naruto"</code></pre>
 
-      <h2 id="info">Details</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/info/:id</span></div>
+        <h2 id="info">Details</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/info/:id</span></div>
 <pre><code>curl "http://localhost:3000/api/info/spy-x-family"</code></pre>
 
-      <h2 id="episodes">Episodes</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/episodes/:id/:season</span></div>
+        <h2 id="episodes">Episodes</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/episodes/:id/:season</span></div>
 <pre><code>curl "http://localhost:3000/api/episodes/spy-x-family/1"</code></pre>
 
-      <h2 id="embed">Embed</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/embed/:id</span></div>
-      <p>Player / iframe data for an episode slug.</p>
+        <h2 id="embed">Embed</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/embed/:id</span></div>
+        <p>Player / iframe data for an episode slug.</p>
 <pre><code>curl "http://localhost:3000/api/embed/some-episode-slug"</code></pre>
 
-      <h2 id="category">Category</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/category/*</span></div>
-      <p>Supports nested paths: movies, series, genre/sci-fi, language/hindi, network/…, franchise/…</p>
+        <h2 id="category">Category</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/category/*</span></div>
+        <p>Supports nested paths: movies, series, genre/sci-fi, language/hindi, network, franchise.</p>
 <pre><code>curl "http://localhost:3000/api/category/movies?page=1"
 curl "http://localhost:3000/api/category/genre/sci-fi?page=2"</code></pre>
 
-      <h2 id="letter">Letter (A–Z)</h2>
-      <div class="card endpoint"><span class="method">GET</span><span class="path">/api/letter/:letter</span></div>
+        <h2 id="letter">Letter (A–Z)</h2>
+        <div class="card endpoint"><span class="method">GET</span><span class="path">/api/letter/:letter</span></div>
 <pre><code>curl "http://localhost:3000/api/letter/N?page=1"</code></pre>
 
-      <h2 id="errors">Errors</h2>
-      <ul>
-        <li><strong>400</strong> — validation / bad request</li>
-        <li><strong>403</strong> — origin not allowed</li>
-        <li><strong>404</strong> — route or resource missing</li>
-        <li><strong>500</strong> — upstream scrape or internal failure</li>
-      </ul>
+        <h2 id="errors">Errors</h2>
+        <ul>
+          <li><strong>400</strong> — validation / bad request</li>
+          <li><strong>403</strong> — origin not allowed</li>
+          <li><strong>404</strong> — route or resource missing</li>
+          <li><strong>500</strong> — upstream scrape or internal failure</li>
+        </ul>
 
-      <h2 id="disclaimer">Disclaimer</h2>
-      <p>This API is for educational and research purposes only. Users must comply with all applicable copyright laws and terms of service. <strong style="color:var(--text)">Dark &amp; Pyro Team</strong> does not endorse piracy. All content remains the property of its respective rights holders.</p>
+        <h2 id="disclaimer">Disclaimer</h2>
+        <p>This API is for educational and research purposes only. Users must comply with all applicable copyright laws and terms of service. <strong style="color:var(--text)">Dark &amp; Pyro Team</strong> does not endorse piracy. All content remains the property of its respective rights holders.</p>
 
-      <p class="footer-note">© 2025 Dark &amp; Pyro Team · AnimeSalt API</p>
+        <p class="footer-note">© 2025 Dark &amp; Pyro Team · Renime API</p>
+      </div>
     </main>
   </div>
 
   <script>
     (function () {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('overlay');
-      const btn = document.getElementById('menuBtn');
-      function open() {
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.getElementById('overlay');
+      var btn = document.getElementById('menuBtn');
+      var icon = document.getElementById('menuIcon');
+
+      function isMobile() {
+        return window.matchMedia('(max-width: 900px)').matches;
+      }
+
+      function openMenu() {
         sidebar.classList.add('open');
         overlay.classList.add('show');
-        overlay.style.display = 'block';
-        requestAnimationFrame(() => overlay.style.opacity = '1');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (icon) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-xmark');
+        }
+        document.body.style.overflow = 'hidden';
       }
-      function close() {
+
+      function closeMenu() {
         sidebar.classList.remove('open');
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-          overlay.classList.remove('show');
-          overlay.style.display = 'none';
-        }, 250);
+        overlay.classList.remove('show');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (icon) {
+          icon.classList.remove('fa-xmark');
+          icon.classList.add('fa-bars');
+        }
+        document.body.style.overflow = '';
       }
-      btn && btn.addEventListener('click', () => {
-        sidebar.classList.contains('open') ? close() : open();
+
+      function toggleMenu() {
+        if (sidebar.classList.contains('open')) closeMenu();
+        else openMenu();
+      }
+
+      if (btn) btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
       });
-      overlay && overlay.addEventListener('click', close);
-      document.querySelectorAll('.nav a').forEach(a => {
-        a.addEventListener('click', () => {
-          if (window.innerWidth <= 900) close();
+
+      if (overlay) overlay.addEventListener('click', closeMenu);
+
+      document.querySelectorAll('.nav a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (isMobile()) closeMenu();
         });
       });
 
-      // Active section highlight
-      const links = [...document.querySelectorAll('.nav-link')];
-      const map = links.map(a => {
-        const id = a.getAttribute('href').slice(1);
-        return { a, el: document.getElementById(id) };
-      }).filter(x => x.el);
+      window.addEventListener('resize', function () {
+        if (!isMobile()) closeMenu();
+      });
 
-      function sync() {
-        let current = map[0];
-        for (const item of map) {
-          if (item.el.getBoundingClientRect().top <= 120) current = item;
+      // Active section highlight
+      var links = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+      var items = links.map(function (a) {
+        var id = (a.getAttribute('href') || '').replace('#', '');
+        return { a: a, el: document.getElementById(id) };
+      }).filter(function (x) { return x.el; });
+
+      function syncActive() {
+        var current = items[0];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].el.getBoundingClientRect().top <= 100) current = items[i];
         }
-        links.forEach(l => l.classList.remove('active'));
+        links.forEach(function (l) { l.classList.remove('active'); });
         if (current) current.a.classList.add('active');
       }
-      window.addEventListener('scroll', sync, { passive: true });
-      sync();
+
+      window.addEventListener('scroll', syncActive, { passive: true });
+      syncActive();
     })();
   </script>
 </body>

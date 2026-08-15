@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AnimeSalt API — multi-provider REST scraper for AnimeSalt & WatchAnimeWorld. By Dark & Pyro Team." />
-  <link rel="icon" type="image/png" href="/AnimeSalt.png" />
-  <title>AnimeSalt API · Dark & Pyro Team</title>
+  <meta name="description" content="Renime API — Hindi anime REST API. Multi-provider scraper for AnimeSalt & WatchAnimeWorld. Dark & Pyro Team." />
+  <link rel="icon" type="image/png" href="/Renime.png" />
+  <title>Renime API · Dark & Pyro Team</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root {
       --bg: #05070d;
@@ -184,16 +185,22 @@
     .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .feature { padding: 22px 20px; position: relative; overflow: hidden; }
     .feature:hover { transform: translateY(-5px); background: var(--glass-hover); }
+    .feature-icon i { font-size: 1.15rem; color: inherit; }
     .feature-icon {
       width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
       margin-bottom: 14px; font-size: 1.25rem;
       background: rgba(125, 211, 252, 0.12); border: 1px solid rgba(125, 211, 252, 0.22);
     }
-    .feature:nth-child(2) .feature-icon { background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.22); }
-    .feature:nth-child(3) .feature-icon { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.22); }
-    .feature:nth-child(4) .feature-icon { background: rgba(110, 231, 183, 0.12); border-color: rgba(110, 231, 183, 0.22); }
-    .feature:nth-child(5) .feature-icon { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.22); }
-    .feature:nth-child(6) .feature-icon { background: rgba(96, 165, 250, 0.12); border-color: rgba(96, 165, 250, 0.22); }
+    .feature:nth-child(2) .feature-icon i { font-size: 1.15rem; color: inherit; }
+    .feature-icon { background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.22); }
+    .feature:nth-child(3) .feature-icon i { font-size: 1.15rem; color: inherit; }
+    .feature-icon { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.22); }
+    .feature:nth-child(4) .feature-icon i { font-size: 1.15rem; color: inherit; }
+    .feature-icon { background: rgba(110, 231, 183, 0.12); border-color: rgba(110, 231, 183, 0.22); }
+    .feature:nth-child(5) .feature-icon i { font-size: 1.15rem; color: inherit; }
+    .feature-icon { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.22); }
+    .feature:nth-child(6) .feature-icon i { font-size: 1.15rem; color: inherit; }
+    .feature-icon { background: rgba(96, 165, 250, 0.12); border-color: rgba(96, 165, 250, 0.22); }
     .feature h3 { font-size: 1rem; font-weight: 650; margin-bottom: 6px; letter-spacing: -0.02em; }
     .feature p { font-size: 0.86rem; color: var(--muted); line-height: 1.55; }
     .provider-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -300,8 +307,8 @@
 
   <nav class="nav">
     <a class="nav-brand" href="/">
-      <img src="/AnimeSalt.png" alt="" />
-      AnimeSalt API
+      <img src="/Renime.png" alt="" />
+      Renime API
     </a>
     <div class="nav-links">
       <a href="#features">Features</a>
@@ -314,29 +321,28 @@
   <div class="page">
     <section class="glass hero">
       <div class="logo-wrap">
-        <img src="/AnimeSalt.png" alt="AnimeSalt" class="logo" />
+        <img src="/Renime.png" alt="Renime" class="logo" />
       </div>
       <div class="badge-row">
         <span class="badge badge-live">Online</span>
         <span class="badge badge-multi">Multi-provider</span>
         <span class="badge badge-team">Dark &amp; Pyro Team</span>
       </div>
-      <h1>AnimeSalt API</h1>
+      <h1>Renime API</h1>
       <p class="lead">
-        A polished REST layer over AnimeSalt &amp; WatchAnimeWorld.
-        Home feeds, search, details, episodes, and embeds — one consistent JSON surface.
+        The Hindi anime API that just works. Multi-provider REST for AnimeSalt &amp; WatchAnimeWorld.
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="/docs.html">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+          <i class="fa-solid fa-book"></i>
           Open documentation
         </a>
         <a class="btn btn-ghost" href="/api/health" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <i class="fa-solid fa-heart-pulse"></i>
           Health check
         </a>
-        <a class="btn btn-ghost" href="https://github.com/itzzzdark/AnimeSalt-API" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.69.82.57C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+        <a class="btn btn-ghost" href="https://github.com/itzzzdark/Renime-API" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i>
           GitHub
         </a>
       </div>
@@ -356,32 +362,32 @@
       </div>
       <div class="features">
         <article class="glass feature">
-          <div class="feature-icon">🌐</div>
+          <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
           <h3>Multi-provider</h3>
           <p>Switch between AnimeSalt and WatchAnimeWorld with a single <code style="font-size:0.8em;opacity:0.85">?provider=</code> flag.</p>
         </article>
         <article class="glass feature">
-          <div class="feature-icon">🎬</div>
+          <div class="feature-icon"><i class="fa-solid fa-clapperboard"></i></div>
           <h3>Home feeds</h3>
           <p>Newest drops, arrivals, movies, cartoons, and ranked most-watched lists in one call.</p>
         </article>
         <article class="glass feature">
-          <div class="feature-icon">🔎</div>
+          <div class="feature-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
           <h3>Search</h3>
           <p>Full page search with images, plus fast AJAX-style title suggestions.</p>
         </article>
         <article class="glass feature">
-          <div class="feature-icon">📺</div>
+          <div class="feature-icon"><i class="fa-solid fa-tv"></i></div>
           <h3>Details &amp; seasons</h3>
           <p>Series and movie metadata, plus season episode lists ready for players.</p>
         </article>
         <article class="glass feature">
-          <div class="feature-icon">🎥</div>
+          <div class="feature-icon"><i class="fa-solid fa-play"></i></div>
           <h3>Embed extraction</h3>
           <p>Pull player / iframe payloads for episode slugs without fighting the DOM yourself.</p>
         </article>
         <article class="glass feature">
-          <div class="feature-icon">🛡️</div>
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
           <h3>Hardened edge</h3>
           <p>Helmet, CORS origin gate, compression, and HTTP retries for flaky upstreams.</p>
         </article>
@@ -418,8 +424,8 @@
       <div class="glass code-block">
         <span class="copy-hint">bash</span>
         <pre><span class="comment"># clone &amp; run</span>
-<span class="prompt">$</span> git clone https://github.com/itzzzdark/AnimeSalt-API.git
-<span class="prompt">$</span> cd AnimeSalt-API && npm install && cp .env.example .env
+<span class="prompt">$</span> git clone https://github.com/itzzzdark/Renime-API.git
+<span class="prompt">$</span> cd Renime-API && npm install && cp .env.example .env
 <span class="prompt">$</span> npm run dev
 
 <span class="comment"># try it</span>
@@ -446,7 +452,7 @@
       <div class="footer-links">
         <a href="/docs.html">Documentation</a>
         <a href="/api/health">Health</a>
-        <a href="https://github.com/itzzzdark/AnimeSalt-API" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/itzzzdark/Renime-API" target="_blank" rel="noopener">GitHub</a>
       </div>
       <div>Built by <strong>Dark &amp; Pyro Team</strong> · © 2025</div>
     </footer>
