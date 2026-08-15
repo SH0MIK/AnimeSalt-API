@@ -1,6 +1,6 @@
 /**
  * Search Controller
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -19,7 +19,8 @@ class SearchController extends BaseController {
           throw new BadRequestError('Either "suggestion" or "q" parameter is required');
         }
 
-        const searchExtractor = new SearchExtractor();
+        const provider = req.query.provider;
+        const searchExtractor = new SearchExtractor(provider);
         let results;
 
         if (q) {

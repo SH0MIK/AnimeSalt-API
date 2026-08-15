@@ -1,6 +1,6 @@
 /**
  * Episodes Controller
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -28,7 +28,8 @@ class EpisodesController extends BaseController {
           throw new BadRequestError('Season must be a positive integer');
         }
 
-        const episodesExtractor = new EpisodesExtractor();
+        const provider = req.query.provider;
+        const episodesExtractor = new EpisodesExtractor(provider);
         const result = await episodesExtractor.extractFromAjax(id, seasonNum);
 
         res.status(200).json({

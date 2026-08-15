@@ -1,6 +1,6 @@
 /**
  * Details Controller
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -19,7 +19,8 @@ class DetailsController extends BaseController {
           throw new BadRequestError('ID parameter is required');
         }
 
-        const detailsExtractor = new DetailsExtractor();
+        const provider = req.query.provider;
+        const detailsExtractor = new DetailsExtractor(provider);
         const detailsData = await detailsExtractor.extractFromUrl(id);
 
         res.status(200).json(detailsData);

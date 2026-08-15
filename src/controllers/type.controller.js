@@ -1,6 +1,6 @@
 /**
  * Type Controller
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -27,7 +27,8 @@ class TypeController extends BaseController {
           throw new BadRequestError('Page must be a positive integer');
         }
 
-        const typeExtractor = new TypeExtractor();
+        const provider = req.query.provider;
+        const typeExtractor = new TypeExtractor(provider);
         const typeData = await typeExtractor.extractFromFile(null, type, pageNum, pathType);
 
         res.status(200).json({

@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2025 Dark & Pyro Team
+ * ⚠️ Educational use only. Respect copyright laws.
+ */
+
 const { sendError } = require('../utils/response');
 const { logger } = require('../utils/logger');
 const { AppError } = require('../utils/errors');

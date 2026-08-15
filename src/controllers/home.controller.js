@@ -1,6 +1,6 @@
 /**
  * Home Controller
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
@@ -14,7 +14,8 @@ class HomeController extends BaseController {
   async home(_req, res, next) {
     await this.execute(_req, res, next, async () => {
       try {
-        const homeExtractor = new HomeExtractor();
+        const provider = _req.query.provider;
+        const homeExtractor = new HomeExtractor(provider);
         const homeData = await homeExtractor.extractFromFile(null);
 
         sendSuccess(res, homeData);
