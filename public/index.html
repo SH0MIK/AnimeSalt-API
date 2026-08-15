@@ -306,8 +306,7 @@
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#providers">Providers</a>
-      <a href="#endpoints">API</a>
-      <a href="/docs.html">Docs</a>
+            <a href="/docs.html">Docs</a>
       <a class="nav-cta" href="/docs.html">Get started</a>
     </div>
   </nav>
@@ -344,35 +343,10 @@
     </section>
 
     <div class="stats">
-      <div class="glass stat"><div class="stat-value" data-count="2">0</div><div class="stat-label">Providers</div></div>
-      <div class="glass stat"><div class="stat-value" data-count="8">0</div><div class="stat-label">Endpoints</div></div>
+      <div class="glass stat"><div class="stat-value">2</div><div class="stat-label">Providers</div></div>
+      <div class="glass stat"><div class="stat-value">8+</div><div class="stat-label">Routes</div></div>
       <div class="glass stat"><div class="stat-value">JSON</div><div class="stat-label">Responses</div></div>
       <div class="glass stat"><div class="stat-value">REST</div><div class="stat-label">Interface</div></div>
-    </div>
-
-    <div class="marquee-wrap" aria-hidden="true">
-      <div class="marquee">
-        <span class="chip">/api/home <span>catalog</span></span>
-        <span class="chip">/api/search <span>q · suggestion</span></span>
-        <span class="chip">/api/info/:id <span>details</span></span>
-        <span class="chip">/api/episodes/:id/:season</span>
-        <span class="chip">/api/embed/:id <span>player</span></span>
-        <span class="chip">/api/category/* <span>browse</span></span>
-        <span class="chip">/api/letter/:letter</span>
-        <span class="chip">/api/providers</span>
-        <span class="chip">provider=watchanimeworld</span>
-        <span class="chip">provider=animesalt</span>
-        <span class="chip">/api/home <span>catalog</span></span>
-        <span class="chip">/api/search <span>q · suggestion</span></span>
-        <span class="chip">/api/info/:id <span>details</span></span>
-        <span class="chip">/api/episodes/:id/:season</span>
-        <span class="chip">/api/embed/:id <span>player</span></span>
-        <span class="chip">/api/category/* <span>browse</span></span>
-        <span class="chip">/api/letter/:letter</span>
-        <span class="chip">/api/providers</span>
-        <span class="chip">provider=watchanimeworld</span>
-        <span class="chip">provider=animesalt</span>
-      </div>
     </div>
 
     <section class="section" id="features" style="animation-delay:0.2s">
@@ -439,23 +413,6 @@
       </div>
     </section>
 
-    <section class="section" id="endpoints" style="animation-delay:0.3s">
-      <div class="section-head">
-        <div class="section-title">Core endpoints</div>
-        <a class="section-link" href="/docs.html#home">See all →</a>
-      </div>
-      <div class="glass endpoints">
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/home</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/search?q=</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/info/:id</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/episodes/:id/:season</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/embed/:id</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/category/*</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/letter/:letter</span></div>
-        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/providers</span></div>
-      </div>
-    </section>
-
     <section class="section" style="animation-delay:0.35s">
       <div class="section-head"><div class="section-title">Quick start</div></div>
       <div class="glass code-block">
@@ -512,21 +469,6 @@
         root.appendChild(p);
       }
     })();
-    (function () {
-      const els = document.querySelectorAll('[data-count]');
-      const ease = t => 1 - Math.pow(1 - t, 3);
-      els.forEach(el => {
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        const dur = 1200;
-        const start = performance.now();
-        function frame(now) {
-          const t = Math.min(1, (now - start) / dur);
-          el.textContent = String(Math.round(ease(t) * target));
-          if (t < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-      });
-    })();
-  </script>
+</script>
 </body>
 </html>
