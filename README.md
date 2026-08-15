@@ -1,57 +1,110 @@
 <div align="center">
-  <img src="public/Renime.png" alt="Project Logo" width="120" height="120">
 
-  # RENIME API
+<img src="public/AnimeSalt.png" width="96" alt="Renime API" />
 
-  **A fast, Restful API delivering localized Hindi anime streaming links, metadata, and episodes..**
+# Renime API
 
-   • 💬 [**Discord**](https://discord.gg/NqKTxrm2VV)
+### Hindi anime. One REST surface. Two providers.
+
+**The API layer people actually ship with** — home feeds, search, details, seasons, embeds.  
+Built for apps that need **Hindi / regional anime & cartoon** catalogs without babysitting scrapers.
+
+[![Node](https://img.shields.io/badge/Node.js-≥18-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org)
+[![Express](https://img.shields.io/badge/Express-4-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
+[![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)](LICENSE)
+[![Team](https://img.shields.io/badge/Dark%20%26%20Pyro-Team-a78bfa?style=for-the-badge)](#)
+
+**Docs** · **Health** · **Providers**
+
 </div>
 
 ---
 
-
-Built by **Dark & Pyro Team**.
-
-> Educational & research use only. Respect copyright laws and site terms. This project does not host or stream media.
+> **Educational & research use only.** Respect copyright law and site terms.  
+> Renime does **not** host video. You scrape public HTML — you own compliance.
 
 ---
 
-## Features
+## Why Renime hits different
 
-| Area | Capability |
-|------|------------|
-| Providers | `animesalt` (default) · `watchanimeworld` |
-| Catalog | Home, category, letter (A–Z), search |
-| Title | Details, season episodes, embed players |
-| Ops | Health check, provider list, CORS gate, retries |
-| UI | Liquid-glass landing, docs, 403/404 pages |
+| | |
+|---|---|
+| **Hindi-first catalogs** | Built around AnimeSalt + WatchAnimeWorld — the stacks people use for Hindi / Tamil / Telugu anime & cartoons |
+| **One param, two worlds** | `?provider=animesalt` or `?provider=watchanimeworld` — same routes, same JSON shape |
+| **Ship-ready routes** | Home · search · info · episodes · embed · category · A–Z |
+| **Not a toy** | Helmet, CORS gate, compression, retries, clean error pages, liquid-glass docs |
+| **Zero drama** | Clone → `npm i` → `npm run dev` → JSON |
+
+---
+
+## Providers
+
+| ID | Site | Aliases |
+|----|------|---------|
+| `animesalt` **(default)** | [animesalt.link](https://animesalt.link) | `salt`, `as` |
+| `watchanimeworld` | [watchanimeworld.top](https://watchanimeworld.top) | `waw`, `animeworld`, `awi` |
+
+```http
+GET /api/home?provider=watchanimeworld
+GET /api/search?q=naruto&provider=animesalt
+```
 
 ---
 
 ## Quick start
 
 ```bash
-git clone https://github.com/itzzzdark/AnimeSalt-API.git
-cd AnimeSalt-API
+git clone https://github.com/itzzzdark/Renime-API.git
+cd Renime-API
 npm install
 cp .env.example .env
 npm run dev
 ```
 
-| Mode | Command |
-|------|---------|
-| Development | `npm run dev` |
-| Production | `npm start` |
+| | |
+|---|---|
+| API | `http://localhost:3000/api` |
+| Landing | `http://localhost:3000/` |
+| Docs | `http://localhost:3000/docs.html` |
 
-API base: `http://localhost:3000/api`  
-Docs UI: `http://localhost:3000/docs.html`
+```bash
+curl "http://localhost:3000/api/health"
+curl "http://localhost:3000/api/home?provider=animesalt"
+curl "http://localhost:3000/api/search?q=demon%20slayer"
+curl "http://localhost:3000/api/info/spy-x-family"
+```
 
 ---
 
-## Configuration
+## Endpoints
 
-`.env`:
+All routes under **`/api`**. Optional query: **`provider`**.
+
+| Method | Path | What you get |
+|--------|------|----------------|
+| `GET` | `/health` | Status + uptime + providers |
+| `GET` | `/providers` | Provider list |
+| `GET` | `/home` | Drops, arrivals, movies, rankings |
+| `GET` | `/search?q=` | Full search + images |
+| `GET` | `/search?suggestion=` | Fast title suggestions |
+| `GET` | `/info/:id` | Series / movie details |
+| `GET` | `/episodes/:id/:season` | Season episode list |
+| `GET` | `/embed/:id` | Player / embed payload |
+| `GET` | `/category/*` | Movies, genres, languages, networks… |
+| `GET` | `/letter/:letter` | A–Z browse |
+
+### Category examples
+
+```http
+GET /api/category/movies
+GET /api/category/genre/sci-fi?page=2
+GET /api/category/language/hindi
+GET /api/letter/N
+```
+
+---
+
+## Config
 
 ```env
 PORT=3000
@@ -59,126 +112,68 @@ NODE_ENV=development
 CORS_ORIGIN=*
 ```
 
-| Variable | Description |
-|----------|-------------|
-| `PORT` | HTTP port (default `3000`) |
-| `NODE_ENV` | `development` or `production` |
-| `CORS_ORIGIN` | `*` or comma-separated allowed origins |
-
-When `CORS_ORIGIN` is not `*`, requests need a matching `Origin` / `Referer` or they receive **403**.
-
----
-
-## Providers
-
-| ID | Base URL | Aliases |
-|----|----------|---------|
-| `animesalt` | https://animesalt.link | `salt`, `as` |
-| `watchanimeworld` | https://watchanimeworld.top | `waw`, `animeworld`, `awi` |
-
-Pass on any scrape route:
-
-```http
-GET /api/home?provider=watchanimeworld
-GET /api/search?q=naruto&provider=waw
-```
-
-```http
-GET /api/providers
-```
-
----
-
-## Endpoints
-
-All routes are prefixed with `/api`.
-
-### Meta
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/health` | Status, uptime, provider list |
-| `GET` | `/providers` | Supported providers |
-
-### Catalog
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/home` | Newest drops, arrivals, movies, rankings |
-| `GET` | `/search?q=` | Full search (with images) |
-| `GET` | `/search?suggestion=` | Fast title suggestions |
-| `GET` | `/category/*` | Movies, series, genre, language, network, franchise |
-| `GET` | `/letter/:letter` | Alphabetical browse |
-
-### Title
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `GET` | `/info/:id` | Series / movie details |
-| `GET` | `/episodes/:id/:season` | Episodes for a season |
-| `GET` | `/embed/:id` | Player / embed payload |
-
-### Examples
-
-```bash
-curl "http://localhost:3000/api/health"
-curl "http://localhost:3000/api/home?provider=animesalt"
-curl "http://localhost:3000/api/search?q=naruto"
-curl "http://localhost:3000/api/info/spy-x-family"
-curl "http://localhost:3000/api/episodes/spy-x-family/1"
-curl "http://localhost:3000/api/category/movies?page=1"
-curl "http://localhost:3000/api/category/genre/sci-fi"
-curl "http://localhost:3000/api/letter/N"
-```
-
----
-
-## Response shape
-
-Successful handlers typically return JSON with scraped fields (and often a success envelope from middleware). Errors use standard HTTP status codes:
-
-| Code | Meaning |
-|------|---------|
-| `400` | Validation / bad input |
-| `403` | Origin not allowed |
-| `404` | Route or resource missing |
-| `500` | Upstream or internal failure |
-
----
-
-## Project structure
-
-```
-AnimeSalt-API/
-├── public/           # Landing, docs, 403, 404 (liquid glass UI)
-├── src/
-│   ├── base/         # Provider-aware base URL
-│   ├── config/       # Env + providers
-│   ├── controllers/
-│   ├── extractors/   # Cheerio scrapers
-│   ├── middleware/
-│   ├── routes/
-│   └── utils/
-├── server.js
-└── package.json
-```
+| Variable | Role |
+|----------|------|
+| `PORT` | Server port |
+| `NODE_ENV` | `development` / `production` |
+| `CORS_ORIGIN` | `*` or comma-separated origins (else **403**) |
 
 ---
 
 ## Stack
 
-- Node.js ≥ 18 · Express
-- Cheerio · Axios · Zod
-- Helmet · CORS · Compression
+```
+Node ≥ 18  ·  Express  ·  Cheerio  ·  Axios  ·  Zod
+Helmet  ·  CORS  ·  Compression
+```
+
+```
+Renime-API/
+├── public/          # Liquid-glass UI + docs
+├── src/
+│   ├── config/      # Providers + env
+│   ├── extractors/  # Scrapers
+│   ├── controllers/
+│   ├── routes/
+│   └── middleware/
+└── server.js
+```
 
 ---
 
-## License & credit
+## Screenshots
 
-ISC · **Copyright © 2025 Dark & Pyro Team**
+<p align="center">
+  <img src="public/home.jpg" width="80%" alt="Renime preview" />
+</p>
 
-No third-party GitHub contributors are attributed in this fork. Credit belongs to **Dark & Pyro Team**.
+---
+
+## Team
+
+**Dark & Pyro Team**
+
+No random contributor noise. This project is credited to **Dark & Pyro Team**.
+
+---
+
+## License
+
+**ISC** · Copyright © 2025 **Dark & Pyro Team**
 
 ### Disclaimer
 
-This software is provided for educational and research purposes only. Users are responsible for compliance with copyright law and terms of service. The authors do not endorse piracy. All media remains the property of its respective rights holders.
+Renime API is provided for **educational and research purposes only**.  
+You are responsible for compliance with copyright law and third-party terms.  
+The authors do **not** endorse piracy. All media remains property of its rights holders.
+
+---
+
+<div align="center">
+
+**Stop wiring broken scrapers.**  
+**Start shipping Renime.**
+
+`npm run dev` → open `/docs.html` → build.
+
+</div>
