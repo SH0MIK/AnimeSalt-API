@@ -1,6 +1,15 @@
-# AnimeSalt API
+<div align="center">
+  <img src="public/Renime.png" alt="Project Logo" width="120" height="120">
 
-**Multi-provider REST scraper** for [AnimeSalt](https://animesalt.link) and [WatchAnimeWorld](https://watchanimeworld.top).
+  # RENIME API
+
+  **A fast, Restful API delivering localized Hindi anime streaming links, metadata, and episodes..**
+
+   • 💬 [**Discord**](https://discord.gg/NqKTxrm2VV)
+</div>
+
+---
+
 
 Built by **Dark & Pyro Team**.
 
