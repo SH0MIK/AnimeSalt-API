@@ -1,7 +1,7 @@
 /**
  * Response Middleware
  * Automatically wraps API responses with success, timestamp, etc.
- * Copyright (c) 2025 Basirul Akhlak Borno - https://github.com/basirulakhlakborno
+ * Copyright (c) 2025 Dark & Pyro Team
  * ⚠️ Educational use only. Respect copyright laws.
  */
 
