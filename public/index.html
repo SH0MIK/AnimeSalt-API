@@ -1,333 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/AnimeSalt.png">
-    <title>AnimeSalt</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            width: 100%;
-            height: 100vh;
-            background-image: url('/background.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle, rgba(0, 0, 0, 0.3) 1px, transparent 1px);
-            background-size: 8px 8px;
-            background-position: 0 0;
-            pointer-events: none;
-            z-index: 1;
-            mix-blend-mode: overlay;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 15px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        .description {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .disclaimer {
-            position: relative;
-            left: 0;
-            right: 0;
-            padding: 8px 15px;
-            text-align: center;
-            z-index: 2;
-            font-size: 9px;
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.4;
-            font-style: italic;
-            max-width: 900px;
-            margin: 0 auto;
-            width: 100%;
-            flex-shrink: 0;
-        }
-
-        .footer {
-            position: relative;
-            left: 0;
-            right: 0;
-            padding: 8px 15px;
-            text-align: center;
-            z-index: 2;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.7);
-            width: 100%;
-            flex-shrink: 0;
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.9);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .github-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: transparent;
-            border: none;
-            border-radius: 6px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .github-icon {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .used-by {
-            margin-top: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .used-by-label {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-
-        .website-link {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .website-link:hover {
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        .website-icon {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: grayscale(100%);
-        }
-
-        .favicon-logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            margin-bottom: 8px;
-        }
-
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                padding: 10px 15px;
-            }
-
-            .title {
-                font-size: 20px;
-                margin-bottom: 6px;
-            }
-
-            .description {
-                font-size: 11px;
-                margin-bottom: 8px;
-            }
-
-            .favicon-logo {
-                width: 40px;
-                height: 40px;
-                margin-bottom: 6px;
-            }
-
-            .github-button {
-                font-size: 12px;
-                padding: 6px 12px;
-                margin-bottom: 6px;
-            }
-
-            .github-icon {
-                width: 14px;
-                height: 14px;
-            }
-
-            .used-by {
-                margin-top: 8px;
-                gap: 4px;
-            }
-
-            .used-by-label {
-                font-size: 9px;
-            }
-
-            .website-icon {
-                width: 40px;
-                height: 40px;
-            }
-
-            .disclaimer {
-                font-size: 8px;
-                padding: 6px 10px;
-                line-height: 1.3;
-            }
-
-            .footer {
-                font-size: 10px;
-                padding: 6px 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .content {
-                padding: 8px 10px;
-            }
-
-            .title {
-                font-size: 18px;
-                margin-bottom: 4px;
-            }
-
-            .description {
-                font-size: 10px;
-                margin-bottom: 6px;
-                line-height: 1.4;
-            }
-
-            .favicon-logo {
-                width: 35px;
-                height: 35px;
-                margin-bottom: 4px;
-            }
-
-            .github-button {
-                font-size: 11px;
-                padding: 5px 10px;
-                margin-bottom: 4px;
-            }
-
-            .github-icon {
-                width: 12px;
-                height: 12px;
-            }
-
-            .used-by {
-                margin-top: 6px;
-                gap: 3px;
-            }
-
-            .used-by-label {
-                font-size: 8px;
-            }
-
-            .website-icon {
-                width: 35px;
-                height: 35px;
-            }
-
-            .disclaimer {
-                font-size: 7px;
-                padding: 5px 8px;
-                line-height: 1.2;
-            }
-
-            .footer {
-                font-size: 9px;
-                padding: 5px 8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AnimeSalt API — multi-provider REST scraper for AnimeSalt & WatchAnimeWorld. By Dark & Pyro Team." />
+  <link rel="icon" type="image/png" href="/AnimeSalt.png" />
+  <title>AnimeSalt API · Dark & Pyro Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05070d;
+      --glass: rgba(255, 255, 255, 0.07);
+      --glass-hover: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --text: #f8fafc;
+      --muted: rgba(248, 250, 252, 0.62);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --accent-3: #f472b6;
+      --success: #6ee7b7;
+      --radius: 22px;
+      --shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      position: relative;
+    }
+    .bg-layer { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .bg-photo {
+      background-image: url('/background.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.2;
+      filter: saturate(1.15) contrast(1.05);
+    }
+      100% { transform: scale(1.12) translate(-2%, 1%); }
+    }
+    .bg-gradient {
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, rgba(125, 211, 252, 0.28), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 95% 5%, rgba(167, 139, 250, 0.22), transparent 50%),
+        radial-gradient(ellipse 50% 50% at 50% 110%, rgba(244, 114, 182, 0.14), transparent 50%),
+        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(110, 231, 183, 0.06), transparent 45%),
+        linear-gradient(180deg, rgba(5, 7, 13, 0.5) 0%, rgba(5, 7, 13, 0.92) 100%);
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.45;
+    }
+    .orb-1 { width: 320px; height: 320px; background: rgba(125, 211, 252, 0.5); top: 8%; left: -5%; }
+    .orb-2 { width: 280px; height: 280px; background: rgba(167, 139, 250, 0.45); top: 40%; right: -8%; }
+    .orb-3 { width: 200px; height: 200px; background: rgba(244, 114, 182, 0.35); bottom: 10%; left: 30%; }
+      33% { transform: translate(30px, -40px) scale(1.08); }
+      66% { transform: translate(-20px, 25px) scale(0.95); }
+    }
+    .noise {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(5, 7, 13, 0.65);
+      border-bottom: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      animation: slideDown 0.7s ease-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text); font-weight: 700; letter-spacing: -0.02em;
+    }
+    .nav-brand img { width: 36px; height: 36px; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.4); }
+    .nav-links { display: flex; align-items: center; gap: 6px; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500;
+      padding: 8px 14px; border-radius: 12px; transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--glass); }
+    .nav-cta {
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.9), rgba(167, 139, 250, 0.85)) !important;
+      color: #0b1020 !important; font-weight: 600 !important;
+      box-shadow: 0 6px 20px rgba(125, 211, 252, 0.25);
+    }
+    .page { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+    .hero {
+      text-align: center; padding: 56px 24px 48px; margin-bottom: 28px;
+      position: relative; overflow: hidden;
+      animation: fadeUp 0.8s ease-out 0.1s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .glass {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      backdrop-filter: blur(16px) saturate(130%);
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+    }
+    .glass:hover { border-color: rgba(255, 255, 255, 0.22); }
+    .hero .logo-wrap { position: relative; display: inline-block; margin-bottom: 20px; }
+    .hero .logo {
+      width: 88px; height: 88px; object-fit: contain; border-radius: 22px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    } 50% { transform: scale(1.04); } } to { transform: rotate(360deg); } }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 16px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase;
+      border: 1px solid transparent; animation: fadeUp 0.7s ease-out both;
+    }
+    .badge-live { background: rgba(110, 231, 183, 0.12); border-color: rgba(110, 231, 183, 0.3); color: var(--success); animation-delay: 0.2s; }
+    .badge-live::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+    }
+    .badge-multi { background: rgba(125, 211, 252, 0.12); border-color: rgba(125, 211, 252, 0.28); color: var(--accent); animation-delay: 0.3s; }
+    .badge-team { background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.28); color: var(--accent-2); animation-delay: 0.4s; } 50% { opacity: 0.35; } }
+    h1 {
+      font-size: clamp(2.1rem, 5.5vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 14px;
+      background: linear-gradient(125deg, #fff 0%, #c7d2fe 35%, #7dd3fc 70%, #f0abfc 100%);
+      background-size: 100% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    } 100% { background-position: 200% center; } }
+    .lead {
+      color: var(--muted); font-size: 1.08rem; line-height: 1.7; max-width: 36em; margin: 0 auto 28px;
+      animation: fadeUp 0.8s ease-out 0.25s both;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; animation: fadeUp 0.8s ease-out 0.35s both; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; padding: 13px 22px; border-radius: 14px;
+      font-size: 0.94rem; font-weight: 600; text-decoration: none; border: 1px solid transparent; cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(-1px); }
+    .btn svg { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.95), rgba(167, 139, 250, 0.9));
+      color: #0b1020; box-shadow: 0 10px 30px rgba(125, 211, 252, 0.28);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(125, 211, 252, 0.4); }
+    .btn-ghost { background: var(--glass); border-color: var(--glass-border); color: var(--text); }
+    .btn-ghost:hover { background: var(--glass-hover); border-color: rgba(255, 255, 255, 0.28); }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat { padding: 22px 16px; text-align: center; animation: fadeUp 0.7s ease-out both; }
+    .stat:nth-child(1) { animation-delay: 0.15s; }
+    .stat:nth-child(2) { animation-delay: 0.25s; }
+    .stat:nth-child(3) { animation-delay: 0.35s; }
+    .stat:nth-child(4) { animation-delay: 0.45s; }
+    .stat:hover { transform: translateY(-4px); background: var(--glass-hover); }
+    .stat-value {
+      font-size: 1.75rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 4px;
+      background: linear-gradient(135deg, #fff, var(--accent-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 600; }
+    .section { margin-bottom: 28px; animation: fadeUp 0.75s ease-out both; }
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; padding: 0 4px; }
+    .section-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; }
+    .section-link { font-size: 0.82rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+    .section-link:hover { text-decoration: underline; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .feature { padding: 22px 20px; position: relative; overflow: hidden; }
+    .feature:hover { transform: translateY(-5px); background: var(--glass-hover); }
+    .feature-icon {
+      width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px; font-size: 1.25rem;
+      background: rgba(125, 211, 252, 0.12); border: 1px solid rgba(125, 211, 252, 0.22);
+    }
+    .feature:nth-child(2) .feature-icon { background: rgba(167, 139, 250, 0.12); border-color: rgba(167, 139, 250, 0.22); }
+    .feature:nth-child(3) .feature-icon { background: rgba(244, 114, 182, 0.12); border-color: rgba(244, 114, 182, 0.22); }
+    .feature:nth-child(4) .feature-icon { background: rgba(110, 231, 183, 0.12); border-color: rgba(110, 231, 183, 0.22); }
+    .feature:nth-child(5) .feature-icon { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.22); }
+    .feature:nth-child(6) .feature-icon { background: rgba(96, 165, 250, 0.12); border-color: rgba(96, 165, 250, 0.22); }
+    .feature h3 { font-size: 1rem; font-weight: 650; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .feature p { font-size: 0.86rem; color: var(--muted); line-height: 1.55; }
+    .provider-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .provider { padding: 22px 20px; display: flex; gap: 16px; align-items: flex-start; text-decoration: none; color: inherit; }
+    .provider:hover { transform: translateY(-4px); background: var(--glass-hover); }
+    .provider-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; box-shadow: 0 0 12px currentColor; }
+    .provider h3 { font-size: 1.05rem; font-weight: 650; margin-bottom: 4px; }
+    .provider .meta { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; }
+    .provider p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .endpoints { padding: 8px; }
+    .endpoint-row {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 12px;
+      transition: background 0.2s; font-size: 0.88rem;
+    }
+    .endpoint-row:hover { background: rgba(255, 255, 255, 0.05); }
+    .method {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600;
+      padding: 3px 8px; border-radius: 6px; background: rgba(110, 231, 183, 0.15); color: var(--success);
+      min-width: 42px; text-align: center;
+    }
+    .endpoint-path { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--text); flex: 1; }
+    .code-block { padding: 18px 20px; position: relative; }
+    .code-block pre {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.65; color: #e2e8f0;
+      overflow-x: auto; white-space: pre;
+    }
+    .code-block .prompt { color: var(--accent); }
+    .code-block .comment { color: rgba(148, 163, 184, 0.8); }
+    .copy-hint { position: absolute; top: 12px; right: 14px; font-size: 0.7rem; color: var(--muted); opacity: 0.7; }
+    .marquee-wrap {
+      overflow: hidden; margin: 8px 0 28px;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .marquee { display: flex; gap: 10px; width: max-content; animation: marquee 48s linear infinite; }
+    .marquee:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 999px;
+      background: var(--glass); border: 1px solid var(--glass-border); font-size: 0.82rem; font-weight: 500;
+      white-space: nowrap; backdrop-filter: blur(12px);
+    }
+    .chip span { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+    .cta-band { padding: 36px 28px; text-align: center; position: relative; overflow: hidden; margin-bottom: 28px; }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, rgba(125, 211, 252, 0.12), rgba(167, 139, 250, 0.12), rgba(244, 114, 182, 0.08));
+    } to { opacity: 1; } }
+    .cta-band h2 { position: relative; font-size: 1.5rem; font-weight: 750; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .cta-band p { position: relative; color: var(--muted); margin-bottom: 20px; font-size: 0.95rem; }
+    .cta-band .actions { position: relative; }
+    .disclaimer {
+      padding: 16px 20px; font-size: 0.8rem; line-height: 1.6; color: rgba(252, 165, 165, 0.92);
+      border-color: rgba(252, 165, 165, 0.22); background: rgba(127, 29, 29, 0.18); margin-bottom: 20px;
+    }
+    .footer { text-align: center; padding: 24px 12px 8px; color: var(--muted); font-size: 0.85rem; }
+    .footer strong { color: var(--text); font-weight: 650; }
+    .footer-links { display: flex; justify-content: center; gap: 18px; margin-bottom: 12px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.84rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; contain: strict; }
+    .particle {
+      position: absolute; width: 3px; height: 3px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5); animation: rise linear infinite;
+    }
+    @keyframes rise {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .features { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .features { grid-template-columns: 1fr; }
+      .provider-grid { grid-template-columns: 1fr; }
+      .actions { flex-direction: column; }
+      .btn { justify-content: center; width: 100%; }
+      .hero { padding: 36px 18px 32px; }
+      .page { padding: 20px 16px 60px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="main-wrapper">
-        <div class="content">
-            <img src="/AnimeSalt.png" alt="AnimeSalt Logo" class="favicon-logo">
-            <h1 class="title">AnimeSalt</h1>
-            <p class="description">A Node.js and Express-powered RESTful API designed to scrape and extract data from AnimeSalt.</p>
-            <a href="https://github.com/itzzzdark" target="_blank" class="github-button">
-                <svg class="github-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                GitHub
-            </a>
-            <div class="used-by">
-                <div class="used-by-label">Used by</div>
-                <a href="https://renime.com" target="_blank" class="website-link">
-                    <img src="/renime.png" alt="Renime" class="website-icon">
-                </a>
-            </div>
-        </div>
-        <p class="disclaimer">⚠️ Legal Disclaimer: This API is provided for educational and research purposes only. Users are responsible for ensuring their use complies with all applicable copyright laws and terms of service. The developers do not endorse or facilitate piracy. All content accessed through this API remains the property of its respective copyright holders. Use responsibly and respect intellectual property rights.</p>
-        <footer class="footer">
-            Built by <strong>Dark &amp; Pyro Team</strong>
-        </footer>
+  <div class="bg-layer bg-photo" aria-hidden="true"></div>
+  <div class="bg-layer bg-gradient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <nav class="nav">
+    <a class="nav-brand" href="/">
+      <img src="/AnimeSalt.png" alt="" />
+      AnimeSalt API
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#providers">Providers</a>
+      <a href="#endpoints">API</a>
+      <a href="/docs.html">Docs</a>
+      <a class="nav-cta" href="/docs.html">Get started</a>
     </div>
+  </nav>
+
+  <div class="page">
+    <section class="glass hero">
+      <div class="logo-wrap">
+        <img src="/AnimeSalt.png" alt="AnimeSalt" class="logo" />
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-live">Online</span>
+        <span class="badge badge-multi">Multi-provider</span>
+        <span class="badge badge-team">Dark &amp; Pyro Team</span>
+      </div>
+      <h1>AnimeSalt API</h1>
+      <p class="lead">
+        A polished REST layer over AnimeSalt &amp; WatchAnimeWorld.
+        Home feeds, search, details, episodes, and embeds — one consistent JSON surface.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/docs.html">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+          Open documentation
+        </a>
+        <a class="btn btn-ghost" href="/api/health" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          Health check
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/itzzzdark/AnimeSalt-API" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.82 1.1.82 2.22v3.29c0 .32.22.69.82.57C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="glass stat"><div class="stat-value" data-count="2">0</div><div class="stat-label">Providers</div></div>
+      <div class="glass stat"><div class="stat-value" data-count="8">0</div><div class="stat-label">Endpoints</div></div>
+      <div class="glass stat"><div class="stat-value">JSON</div><div class="stat-label">Responses</div></div>
+      <div class="glass stat"><div class="stat-value">REST</div><div class="stat-label">Interface</div></div>
+    </div>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span class="chip">/api/home <span>catalog</span></span>
+        <span class="chip">/api/search <span>q · suggestion</span></span>
+        <span class="chip">/api/info/:id <span>details</span></span>
+        <span class="chip">/api/episodes/:id/:season</span>
+        <span class="chip">/api/embed/:id <span>player</span></span>
+        <span class="chip">/api/category/* <span>browse</span></span>
+        <span class="chip">/api/letter/:letter</span>
+        <span class="chip">/api/providers</span>
+        <span class="chip">provider=watchanimeworld</span>
+        <span class="chip">provider=animesalt</span>
+        <span class="chip">/api/home <span>catalog</span></span>
+        <span class="chip">/api/search <span>q · suggestion</span></span>
+        <span class="chip">/api/info/:id <span>details</span></span>
+        <span class="chip">/api/episodes/:id/:season</span>
+        <span class="chip">/api/embed/:id <span>player</span></span>
+        <span class="chip">/api/category/* <span>browse</span></span>
+        <span class="chip">/api/letter/:letter</span>
+        <span class="chip">/api/providers</span>
+        <span class="chip">provider=watchanimeworld</span>
+        <span class="chip">provider=animesalt</span>
+      </div>
+    </div>
+
+    <section class="section" id="features" style="animation-delay:0.2s">
+      <div class="section-head">
+        <div class="section-title">What you get</div>
+        <a class="section-link" href="/docs.html">Full docs →</a>
+      </div>
+      <div class="features">
+        <article class="glass feature">
+          <div class="feature-icon">🌐</div>
+          <h3>Multi-provider</h3>
+          <p>Switch between AnimeSalt and WatchAnimeWorld with a single <code style="font-size:0.8em;opacity:0.85">?provider=</code> flag.</p>
+        </article>
+        <article class="glass feature">
+          <div class="feature-icon">🎬</div>
+          <h3>Home feeds</h3>
+          <p>Newest drops, arrivals, movies, cartoons, and ranked most-watched lists in one call.</p>
+        </article>
+        <article class="glass feature">
+          <div class="feature-icon">🔎</div>
+          <h3>Search</h3>
+          <p>Full page search with images, plus fast AJAX-style title suggestions.</p>
+        </article>
+        <article class="glass feature">
+          <div class="feature-icon">📺</div>
+          <h3>Details &amp; seasons</h3>
+          <p>Series and movie metadata, plus season episode lists ready for players.</p>
+        </article>
+        <article class="glass feature">
+          <div class="feature-icon">🎥</div>
+          <h3>Embed extraction</h3>
+          <p>Pull player / iframe payloads for episode slugs without fighting the DOM yourself.</p>
+        </article>
+        <article class="glass feature">
+          <div class="feature-icon">🛡️</div>
+          <h3>Hardened edge</h3>
+          <p>Helmet, CORS origin gate, compression, and HTTP retries for flaky upstreams.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="providers" style="animation-delay:0.25s">
+      <div class="section-head">
+        <div class="section-title">Supported providers</div>
+        <a class="section-link" href="/api/providers" target="_blank" rel="noopener">JSON list →</a>
+      </div>
+      <div class="provider-grid">
+        <a class="glass provider" href="https://animesalt.link" target="_blank" rel="noopener">
+          <div class="provider-dot" style="color:#7dd3fc;background:#7dd3fc"></div>
+          <div>
+            <h3>AnimeSalt</h3>
+            <div class="meta">animesalt · salt · as</div>
+            <p>Default upstream. Hindi, Tamil, Telugu–focused anime &amp; cartoons catalog.</p>
+          </div>
+        </a>
+        <a class="glass provider" href="https://watchanimeworld.top" target="_blank" rel="noopener">
+          <div class="provider-dot" style="color:#a78bfa;background:#a78bfa"></div>
+          <div>
+            <h3>WatchAnimeWorld</h3>
+            <div class="meta">watchanimeworld · waw · animeworld</div>
+            <p>Same Torofilm-style UI — drop-in alternate source via one query param.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="endpoints" style="animation-delay:0.3s">
+      <div class="section-head">
+        <div class="section-title">Core endpoints</div>
+        <a class="section-link" href="/docs.html#home">See all →</a>
+      </div>
+      <div class="glass endpoints">
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/home</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/search?q=</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/info/:id</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/episodes/:id/:season</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/embed/:id</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/category/*</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/letter/:letter</span></div>
+        <div class="endpoint-row"><span class="method">GET</span><span class="endpoint-path">/api/providers</span></div>
+      </div>
+    </section>
+
+    <section class="section" style="animation-delay:0.35s">
+      <div class="section-head"><div class="section-title">Quick start</div></div>
+      <div class="glass code-block">
+        <span class="copy-hint">bash</span>
+        <pre><span class="comment"># clone &amp; run</span>
+<span class="prompt">$</span> git clone https://github.com/itzzzdark/AnimeSalt-API.git
+<span class="prompt">$</span> cd AnimeSalt-API && npm install && cp .env.example .env
+<span class="prompt">$</span> npm run dev
+
+<span class="comment"># try it</span>
+<span class="prompt">$</span> curl "http://localhost:3000/api/home?provider=watchanimeworld"
+<span class="prompt">$</span> curl "http://localhost:3000/api/search?q=naruto&amp;provider=animesalt"</pre>
+      </div>
+    </section>
+
+    <section class="glass cta-band">
+      <h2>Ready to integrate?</h2>
+      <p>Browse the full reference, copy examples, and wire your client in minutes.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/docs.html">Read the docs</a>
+        <a class="btn btn-ghost" href="/api/providers" target="_blank" rel="noopener">List providers</a>
+      </div>
+    </section>
+
+    <p class="glass disclaimer">
+      Educational &amp; research use only. You are responsible for complying with copyright law and site terms of service.
+      This project does not host or endorse pirated content. Built by <strong style="color:#fecaca">Dark &amp; Pyro Team</strong>.
+    </p>
+
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="/docs.html">Documentation</a>
+        <a href="/api/health">Health</a>
+        <a href="https://github.com/itzzzdark/AnimeSalt-API" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div>Built by <strong>Dark &amp; Pyro Team</strong> · © 2025</div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.getElementById('particles');
+      if (!root) return;
+      const n = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 12;
+      for (let i = 0; i < n; i++) {
+        const p = document.createElement('span');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (12 + Math.random() * 18) + 's';
+        p.style.animationDelay = (Math.random() * 12) + 's';
+        p.style.opacity = String(0.2 + Math.random() * 0.5);
+        const s = (2 + Math.random() * 3) + 'px';
+        p.style.width = p.style.height = s;
+        root.appendChild(p);
+      }
+    })();
+    (function () {
+      const els = document.querySelectorAll('[data-count]');
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      els.forEach(el => {
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const dur = 1200;
+        const start = performance.now();
+        function frame(now) {
+          const t = Math.min(1, (now - start) / dur);
+          el.textContent = String(Math.round(ease(t) * target));
+          if (t < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      });
+    })();
+  </script>
 </body>
 </html>

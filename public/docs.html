@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AnimeSalt API documentation — endpoints, providers, examples. Dark & Pyro Team." />
+  <link rel="icon" type="image/png" href="/AnimeSalt.png" />
+  <title>Docs · AnimeSalt API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #07090f;
+      --glass: rgba(255, 255, 255, 0.06);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --text: #f1f5f9;
+      --muted: rgba(241, 245, 249, 0.65);
+      --accent: #7dd3fc;
+      --accent-2: #a78bfa;
+      --code-bg: rgba(0, 0, 0, 0.35);
+      --radius: 16px;
+      --sidebar-w: 240px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(1000px 500px at 0% 0%, rgba(125, 211, 252, 0.12), transparent 50%),
+        radial-gradient(800px 600px at 100% 0%, rgba(167, 139, 250, 0.1), transparent 45%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 28px 18px;
+      border-right: 1px solid var(--glass-border);
+      background: rgba(7, 9, 15, 0.85);
+      backdrop-filter: blur(16px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand img { width: 32px; height: 32px; border-radius: 8px; }
+    .brand span { font-weight: 700; font-size: 0.95rem; letter-spacing: -0.02em; }
+    .nav-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 600;
+      margin: 18px 0 8px;
+      padding-left: 8px;
+    }
+    .nav a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav a:hover { background: var(--glass); color: var(--text); text-decoration: none; }
+
+    .main {
+      padding: 40px 48px 80px;
+      max-width: 860px;
+    }
+    .main h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .main .subtitle {
+      color: var(--muted);
+      margin-bottom: 32px;
+      font-size: 1.05rem;
+    }
+    .main h2 {
+      font-size: 1.25rem;
+      font-weight: 650;
+      margin: 40px 0 14px;
+      padding-top: 8px;
+      letter-spacing: -0.02em;
+      border-top: 1px solid var(--glass-border);
+    }
+    .main h2:first-of-type { border-top: none; margin-top: 24px; }
+    .main h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: #e2e8f0;
+    }
+    .main p { color: var(--muted); margin-bottom: 12px; }
+    .main ul { margin: 0 0 16px 1.2em; color: var(--muted); }
+    .main li { margin-bottom: 6px; }
+
+    .glass-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin: 16px 0;
+      backdrop-filter: blur(12px);
+    }
+
+    .method {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(52, 211, 153, 0.15);
+      color: #6ee7b7;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    .path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      margin: 12px 0 18px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.8rem;
+      line-height: 1.55;
+      color: #e2e8f0;
+    }
+    code {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.85em;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 5px;
+    }
+    pre code { background: none; padding: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: 0.88rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    td { color: var(--text); }
+    td code { font-size: 0.8rem; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(125, 211, 252, 0.15);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .warn {
+      border-color: rgba(252, 165, 165, 0.25);
+      background: rgba(127, 29, 29, 0.2);
+      color: #fecaca;
+      font-size: 0.88rem;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+      }
+      .main { padding: 28px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <a class="brand" href="/">
+        <img src="/AnimeSalt.png" alt="" />
+        <span>AnimeSalt API</span>
+      </a>
+      <div class="nav">
+        <div class="nav-label">Start</div>
+        <a href="#overview">Overview</a>
+        <a href="#providers">Providers</a>
+        <a href="#auth">Access control</a>
+        <a href="#install">Install</a>
+        <div class="nav-label">Endpoints</div>
+        <a href="#health">Health &amp; providers</a>
+        <a href="#home">Home</a>
+        <a href="#search">Search</a>
+        <a href="#info">Details</a>
+        <a href="#episodes">Episodes</a>
+        <a href="#embed">Embed</a>
+        <a href="#category">Category</a>
+        <a href="#letter">Letter</a>
+        <div class="nav-label">More</div>
+        <a href="#errors">Errors</a>
+        <a href="#disclaimer">Disclaimer</a>
+        <a href="/">← Home</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <h1>API Documentation</h1>
+      <p class="subtitle">Multi-provider REST scraper for AnimeSalt &amp; WatchAnimeWorld. Built by <strong style="color:var(--text)">Dark &amp; Pyro Team</strong>.</p>
+
+      <div class="glass-card warn">
+        Educational and research use only. Respect copyright laws and site terms of service. This project does not host media content.
+      </div>
+
+      <h2 id="overview">Overview</h2>
+      <p>All scrape routes live under <code>/api</code> and return JSON. Switch upstream sources with the global <code>provider</code> query parameter.</p>
+      <table>
+        <thead><tr><th>Param</th><th>Values</th><th>Default</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>provider</code></td>
+            <td><code>animesalt</code>, <code>watchanimeworld</code> (aliases: <code>waw</code>, <code>animeworld</code>, <code>salt</code>, <code>as</code>)</td>
+            <td><code>animesalt</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="providers">Providers</h2>
+      <table>
+        <thead><tr><th>ID</th><th>Site</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>animesalt</code></td><td>animesalt.link</td><td>Default</td></tr>
+          <tr><td><code>watchanimeworld</code></td><td>watchanimeworld.top</td><td>Same UI theme</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="auth">Access control</h2>
+      <p>When <code>CORS_ORIGIN</code> is not <code>*</code>, requests must include a matching <code>Origin</code> or <code>Referer</code> header. Mismatches receive a 403 HTML page.</p>
+
+      <h2 id="install">Install</h2>
+<pre><code>git clone https://github.com/itzzzdark/AnimeSalt-API.git
+cd AnimeSalt-API
+npm install
+cp .env.example .env
+npm run dev</code></pre>
+      <p>Default base: <code>http://localhost:3000</code></p>
+
+      <h2 id="health">Health &amp; providers</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/health</span>
+      </div>
+<pre><code>curl http://localhost:3000/api/health</code></pre>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/providers</span>
+      </div>
+<pre><code>curl http://localhost:3000/api/providers</code></pre>
+
+      <h2 id="home">Home</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/home</span>
+        <span class="badge">provider</span>
+      </div>
+      <p>Newest drops, arrivals, movies, cartoons, most-watched lists.</p>
+<pre><code>curl "http://localhost:3000/api/home?provider=watchanimeworld"</code></pre>
+
+      <h2 id="search">Search</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/search</span>
+      </div>
+      <table>
+        <thead><tr><th>Param</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>q</code></td><td>Full search with images</td></tr>
+          <tr><td><code>suggestion</code></td><td>Fast AJAX suggestions (titles only)</td></tr>
+        </tbody>
+      </table>
+<pre><code>curl "http://localhost:3000/api/search?q=naruto&amp;provider=animesalt"
+curl "http://localhost:3000/api/search?suggestion=naruto"</code></pre>
+
+      <h2 id="info">Details</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/info/:id</span>
+      </div>
+<pre><code>curl "http://localhost:3000/api/info/spy-x-family"</code></pre>
+
+      <h2 id="episodes">Episodes</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/episodes/:id/:season</span>
+      </div>
+<pre><code>curl "http://localhost:3000/api/episodes/spy-x-family/1"</code></pre>
+
+      <h2 id="embed">Embed</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/embed/:id</span>
+      </div>
+      <p>Player / iframe data for an episode slug.</p>
+<pre><code>curl "http://localhost:3000/api/embed/some-episode-slug"</code></pre>
+
+      <h2 id="category">Category</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/category/*</span>
+      </div>
+      <p>Supports nested paths: movies, series, genre/sci-fi, language/hindi, network/…, franchise/…</p>
+<pre><code>curl "http://localhost:3000/api/category/movies?page=1"
+curl "http://localhost:3000/api/category/genre/sci-fi?page=2"
+curl "http://localhost:3000/api/category/language/hindi"</code></pre>
+
+      <h2 id="letter">Letter (A–Z)</h2>
+      <div class="glass-card">
+        <span class="method">GET</span><span class="path">/api/letter/:letter</span>
+      </div>
+<pre><code>curl "http://localhost:3000/api/letter/N?page=1"</code></pre>
+
+      <h2 id="errors">Errors</h2>
+      <ul>
+        <li><strong>400</strong> — validation / bad request</li>
+        <li><strong>403</strong> — origin not allowed</li>
+        <li><strong>404</strong> — route or resource missing</li>
+        <li><strong>500</strong> — upstream scrape or internal failure</li>
+      </ul>
+
+      <h2 id="disclaimer">Disclaimer</h2>
+      <p>This API is for educational and research purposes only. Users must comply with all applicable copyright laws and terms of service. Dark &amp; Pyro Team does not endorse piracy. All content remains the property of its respective rights holders.</p>
+
+      <p class="footer-note">© 2025 Dark &amp; Pyro Team · AnimeSalt API</p>
+    </main>
+  </div>
+</body>
+</html>
