@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/AnimeSalt.png" width="96" alt="Renime API" />
+<img src="public/Renime.png" width="96" alt="Renime API" />
 
 # Renime API
 
