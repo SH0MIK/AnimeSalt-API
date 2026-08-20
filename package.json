@@ -1,7 +1,7 @@
 {
-  "name": "animesalt-api",
+  "name": "renime-api",
   "version": "1.1.0",
-  "description": "RESTful multi-provider API scraper for AnimeSalt (animesalt.link) and WatchAnimeWorld (watchanimeworld.top). \u26a0\ufe0f Educational use only \u2014 respect copyright laws.",
+  "description": "Renime API \u2014 Hindi anime multi-provider REST scraper (AnimeSalt + WatchAnimeWorld). Educational use only.",
   "main": "server.js",
   "scripts": {
     "dev": "node --watch server.js",
@@ -23,7 +23,11 @@
     "movies-api",
     "series-api",
     "data-extraction",
-    "rest-api"
+    "rest-api",
+    "renime",
+    "hindi-anime",
+    "hindi",
+    "dubbed-anime"
   ],
   "author": "Dark & Pyro Team",
   "license": "ISC",
@@ -53,9 +57,9 @@
     "LICENSE",
     ".env.example"
   ],
-  "homepage": "https://github.com/itzzzdark/AnimeSalt-API",
+  "homepage": "https://github.com/itzzzdark/Renime-API",
   "repository": {
     "type": "git",
-    "url": "https://github.com/itzzzdark/AnimeSalt-API"
+    "url": "https://github.com/itzzzdark/Renime-API"
   }
 }
