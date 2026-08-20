@@ -199,3 +199,5 @@ All media remains the property of its respective rights holders.
 Read [`docs.md`](docs.md) · open `/docs.html` · `npm run dev`
 
 </div>
+
+### dont forget to give a star ⭐ :)
